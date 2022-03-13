@@ -1,0 +1,7 @@
+{
+  "name": "PomodoroMusic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
