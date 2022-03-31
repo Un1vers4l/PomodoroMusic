@@ -1,0 +1,92 @@
+<ion-content>
+  <ion-grid>
+      <ion-row>
+          <ion-col size-xl="3" size-xs="0"></ion-col>
+          <ion-col size-xl="6" size-xs="12">
+              <ion-card>
+                  <ion-card-header>
+                      <ion-card-title>
+                          <ion-row>
+                              <ion-col size="11">
+                                  <h4> <b>Settings</b></h4>
+                              </ion-col>
+                              <ion-col size="1">
+                                  <button (click)="goToHome()" style="background-color: #fff;" size="large">
+                                      <ion-icon name=close-outline size="large" color="medium">
+                                      </ion-icon>
+                                  </button>
+                              </ion-col>
+                          </ion-row>
+                      </ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                      <ion-list>
+                          <ion-item-group>
+                              <ion-item-divider>
+                                  <ion-label>Timer-Settings</ion-label>
+                              </ion-item-divider><br>
+                              <ion-label id="worklabel">Work</ion-label>
+                              <ion-item lines="none">
+                                  <ion-range min="1" max="60" step="1" [(ngModel)]="studytime" color="stop">
+                                      <ion-icon size="small" slot="start" name="school"></ion-icon>
+                                      <ion-icon slot="end" name="school"></ion-icon>
+                                  </ion-range>
+                                  <ion-badge color="stop">{{studytime}}</ion-badge>
+                              </ion-item>
+                              <ion-label id="pauselabel">Pause</ion-label>
+                              <ion-item lines="none">
+                                  <ion-range min="1" max="60" step="1" [(ngModel)]="pausetime" color="stop">
+                                      <ion-icon size="small" slot="start" name="color-palette"></ion-icon>
+                                      <ion-icon slot="end" name="color-palette"></ion-icon>
+                                  </ion-range>
+                                  <ion-badge color="stop">{{pausetime}}</ion-badge>
+                              </ion-item>
+                          </ion-item-group>
+                      </ion-list>
+                      <div>
+                          <ion-list>
+                              <ion-item-group>
+                                  <ion-item-divider *ngIf="isAutenticated">
+                                      <ion-label>Spotify-Settings</ion-label>
+                                  </ion-item-divider>
+                                  <ion-item lines="none" *ngIf="isAutenticated">
+                                      <ion-label>Work-Playlist</ion-label>
+                                      <ionic-selectable [(ngModel)]="studyPlaylist" [items]="filteredPlaylists"
+                                          itemValueField="id" itemTextField="name"
+                                          (onSearch)="searchPlaylists($event)" [canSearch]="true">
+                                      </ionic-selectable>
+                                  </ion-item>
+                                  <ion-item lines="none" *ngIf="isAutenticated">
+                                      <ion-label>Pause-Playlist</ion-label>
+                                      <ionic-selectable [(ngModel)]="pausePlaylist" [items]="filteredPlaylists"
+                                          itemValueField="id" itemTextField="name"
+                                          (onSearch)="searchPlaylists($event)" [canSearch]="true">
+                                      </ionic-selectable>
+                                  </ion-item>
+                              </ion-item-group>
+                              <ion-item>
+                                <ion-label>Alarm Sound</ion-label>
+                                <ion-toggle [(ngModel)]="alarmSound" color = "stop"></ion-toggle>
+                             </ion-item>
+                          </ion-list>
+                      </div>
+                      <ion-row class="ion-justify-content-center">
+                          <ion-button class="btn btn-primary" shape="round" strong="true" color="dark" value="Login"
+                              (click)="login()">
+                              Login with
+                              Spotify
+                          </ion-button>
+                      </ion-row>
+                  </ion-card-content>
+                  <div>
+                      <ion-row style="background:#f4f5f8" class="ion-justify-content-end"
+                          style="margin-right:15px; margin-bottom: 15px;">
+                          <ion-button (click)=" save()" color="stop">Save</ion-button>
+                      </ion-row>
+                  </div>
+              </ion-card>
+          </ion-col>
+          <ion-col size="3"></ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

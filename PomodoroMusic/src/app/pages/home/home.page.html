@@ -1,0 +1,66 @@
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-end">
+      <ion-button href="/settings" fill="clear">
+        <ion-icon slot="icon-only" name="settings" color="dark"></ion-icon>
+      </ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-card>
+        <ion-row class="ion-justify-content-center" style="margin-top: 35px">
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button (click)="startWork()" shape="round" color="dark">Work</ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button (click)="startPause()" shape="round" color="dark">Pause</ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <svg id="progress-circle" width="50vh" height="50vh" viewBox="0 0 150 150">
+            <linearGradient id="linearGradient" x1="0" y1="1" y2="1">
+              <stop offset="0%" stop-color="#f1e4e4"></stop> <!-- Farbe des Kreises -->
+              <stop offset="100%" stop-color="#c56f82"></stop> <!-- Farbe des Kreises -->
+            </linearGradient>
+            <circle cx="50%" cy="50%" [attr.r]="circleR" fill="none" stroke="#f3f3f3" stroke-width="12" />
+            <circle cx="50%" cy="50%" [attr.r]="circleR" fill="none" stroke="url(#linearGradient)" stroke-width="12"
+              stroke-linecap="round" [attr.stroke-dasharray]="circleDasharray"
+              [attr.stroke-dashoffset]="percentageOffset(percent | async)" />
+            <text x="50%" y="55%" class="timer-text">{{ time | async }}</text>
+          </svg>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-text>{{trackTitle}}</ion-text>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-text *ngFor="let artists of trackArtists">{{artists}} </ion-text>
+        </ion-row>
+        <ion-row class="ion-justify-content-center" style="margin-top:10px;">
+          <ion-button fill="clear" color="background-color" (click)="previousTrack()">
+            <ion-icon size="large" name="caret-back" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="currentlyPlaying" fill="clear" color="background-color" (click)="stopMusic()">
+            <ion-icon size="large" name="pause" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="!currentlyPlaying" fill="clear" color="background-color" (click)="startMusic()">
+            <ion-icon size="large" name="play" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="background-color" (click)="nextTrack()">
+            <ion-icon size="large" name="caret-forward" color="dark"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-button style="margin-top: 15px" *ngIf="state === 'stop'" expand="block" color="dark"
+          (click)="startTimer()">
+          START</ion-button>
+        <ion-button style="margin-top: 15px" *ngIf="state === 'start'" expand="block" color="stop"
+          (click)="stopTimer()">STOP</ion-button>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer class="footer">
+
+</ion-footer>
